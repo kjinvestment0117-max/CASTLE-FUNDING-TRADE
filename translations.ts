@@ -52,7 +52,12 @@ export const translations = {
       card: "Credit/Debit Card",
       bank: "Bank Transfer",
       confirm: "Pay & Initialize",
-      back: "Cancel & Return"
+      back: "Cancel & Return",
+      bank_info: "Bank Deposit Info",
+      bank_name: "Bank Name",
+      account_number: "Account Number",
+      depositor: "Recipient",
+      copy: "Copy"
     },
     payout: {
       title: "Fast & Flexible",
@@ -185,9 +190,14 @@ export const translations = {
       method: "결제 수단",
       crypto: "암호화폐 결제",
       card: "신용/체크카드",
-      bank: "계좌 이체",
+      bank: "무통장 입금",
       confirm: "결제 및 계정 생성",
-      back: "취소하고 돌아가기"
+      back: "취소하고 돌아가기",
+      bank_info: "무통장 입금 정보",
+      bank_name: "은행명",
+      account_number: "계좌번호",
+      depositor: "예금주",
+      copy: "복사"
     },
     payout: {
       title: "빠르고 유연한",
