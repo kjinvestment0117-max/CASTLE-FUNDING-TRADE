@@ -1,9 +1,10 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Castle Funding - Premium Proprietary Trading Evaluation" />
     <title>Castle Funding | Pro Trading Evaluation</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -62,18 +63,19 @@
         background: var(--gold-primary);
       }
     </style>
-    <script type="importmap">
-    {
-      "imports": {
-        "react": "https://esm.sh/react@19.0.0",
-        "react/": "https://esm.sh/react@19.0.0/",
-        "react-dom": "https://esm.sh/react-dom@19.0.0",
-        "react-dom/": "https://esm.sh/react-dom@19.0.0/",
-        "recharts": "https://esm.sh/recharts@2.12.7?external=react,react-dom"
-      }
-    }
-    </script>
-  </head>
+  <script type="importmap">
+{
+  "imports": {
+    "recharts": "https://esm.sh/recharts@^3.6.0",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "vite": "https://esm.sh/vite@^7.3.1",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
+  }
+}
+</script>
+</head>
   <body>
     <div id="app-loader" style="position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#050505;z-index:9999;transition:opacity 0.5s ease;">
       <div style="font-family:'Cinzel',serif;font-size:24px;font-weight:900;letter-spacing:0.2em;color:#b8860b;margin-bottom:20px;">CASTLE FUNDING</div>
@@ -81,5 +83,7 @@
       <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
     </div>
     <div id="root"></div>
+    <!-- Netlify build command will transpile this index.tsx -->
+    <script type="module" src="/index.tsx"></script>
   </body>
 </html>
