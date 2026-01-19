@@ -10,6 +10,7 @@ declare global {
   }
 }
 
+// Fixed missing closing braces and default export for Payment component
 const Payment: React.FC<{ plan: PricingPlan | null }> = ({ plan }) => {
   const { t } = useLanguage();
   const [method, setMethod] = useState<'toss' | 'metamask' | 'bank'>('toss');
@@ -134,6 +135,27 @@ const Payment: React.FC<{ plan: PricingPlan | null }> = ({ plan }) => {
             </div>
           </button>
 
+          {/* Web3 / MetaMask */}
+          <button 
+            onClick={() => setMethod('metamask')}
+            className={`p-6 rounded-3xl border flex items-center justify-between transition-all duration-300 ${
+              method === 'metamask' ? 'border-[#b8860b] bg-[#b8860b]/10 shadow-lg shadow-[#b8860b]/5' : 'border-white/5 glass hover:bg-white/5'
+            }`}
+          >
+            <div className="flex items-center space-x-5">
+              <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all ${method === 'metamask' ? 'btn-gold text-black scale-105 shadow-xl' : 'bg-white/10 text-white'}`}>
+                <span className="font-black text-lg">W</span>
+              </div>
+              <div className="text-left">
+                <span className="block font-black text-sm uppercase tracking-widest">Crypto Wallet</span>
+                <span className="text-[10px] text-gray-500 font-bold uppercase tracking-tight">MetaMask, WalletConnect (USDT/ETH)</span>
+              </div>
+            </div>
+            <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors ${method === 'metamask' ? 'border-[#b8860b]' : 'border-white/10'}`}>
+              {method === 'metamask' && <div className="w-2.5 h-2.5 bg-[#b8860b] rounded-full" />}
+            </div>
+          </button>
+
           {/* Bank */}
           <button 
             onClick={() => setMethod('bank')}
@@ -142,4 +164,71 @@ const Payment: React.FC<{ plan: PricingPlan | null }> = ({ plan }) => {
             }`}
           >
             <div className="flex items-center space-x-5">
-              <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all ${
+              <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all ${method === 'bank' ? 'btn-gold text-black scale-105 shadow-xl' : 'bg-white/10 text-white'}`}>
+                <span className="font-black text-lg">B</span>
+              </div>
+              <div className="text-left">
+                <span className="block font-black text-sm uppercase tracking-widest">Bank Transfer</span>
+                <span className="text-[10px] text-gray-500 font-bold uppercase tracking-tight">무통장 입금 (KRW)</span>
+              </div>
+            </div>
+            <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors ${method === 'bank' ? 'border-[#b8860b]' : 'border-white/10'}`}>
+              {method === 'bank' && <div className="w-2.5 h-2.5 bg-[#b8860b] rounded-full" />}
+            </div>
+          </button>
+        </div>
+      </div>
+
+      {method === 'bank' && (
+        <div className="glass p-8 rounded-[32px] border border-white/5 space-y-6 animate-in slide-in-from-top duration-300">
+          <h4 className="text-[10px] font-black text-[#b8860b] uppercase tracking-[0.2em]">{t.checkout.bank_info}</h4>
+          <div className="space-y-4">
+            <div className="flex justify-between items-center">
+              <span className="text-xs text-gray-500 uppercase font-bold">{t.checkout.bank_name}</span>
+              <span className="text-sm font-black">{BANK_NAME}</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-xs text-gray-500 uppercase font-bold">{t.checkout.account_number}</span>
+              <div className="flex items-center space-x-3">
+                <span className="text-sm font-black">{BANK_ACCOUNT}</span>
+                <button onClick={handleCopy} className="text-[10px] bg-white/10 hover:bg-white/20 px-3 py-1 rounded-full transition-colors uppercase font-black tracking-widest">
+                  {copied ? 'COPIED!' : t.checkout.copy}
+                </button>
+              </div>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-xs text-gray-500 uppercase font-bold">{t.checkout.depositor}</span>
+              <span className="text-sm font-black">{RECIPIENT}</span>
+            </div>
+          </div>
+          <p className="text-[9px] text-gray-500 font-bold uppercase text-center pt-4">입금 시 반드시 가입하신 성함으로 입금해 주세요.</p>
+        </div>
+      )}
+
+      {method === 'metamask' && walletAddress && (
+        <div className="glass p-6 rounded-[24px] border border-[#b8860b]/20 text-center space-y-2 animate-in fade-in">
+          <div className="text-[9px] font-black text-gray-500 uppercase tracking-widest">Connected Wallet</div>
+          <div className="text-xs font-mono text-[#b8860b] truncate">{walletAddress}</div>
+        </div>
+      )}
+
+      <div className="pt-6">
+        <button 
+          onClick={handleFinalPayment}
+          disabled={isProcessing}
+          className="w-full btn-gold text-black py-6 rounded-3xl font-black text-sm uppercase tracking-[0.3em] shadow-[0_20px_50px_rgba(184,134,11,0.2)] transition-all hover:scale-[1.02] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {isProcessing ? 'Processing Transaction...' : t.checkout.confirm}
+        </button>
+        <button 
+          onClick={() => window.location.hash = '#apply'}
+          className="w-full mt-4 text-gray-600 hover:text-white transition-colors py-2 text-[10px] font-black uppercase tracking-widest"
+        >
+          {t.checkout.back}
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default Payment;

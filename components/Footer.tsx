@@ -45,7 +45,8 @@ const Footer: React.FC = () => {
           <h4 className="font-castle font-black text-lg uppercase tracking-wider mb-8 text-white">{t.footer.support}</h4>
           <ul className="space-y-5">
             <li><a href="#support" className="text-gray-500 hover:text-[#b8860b] transition-all font-bold text-xs uppercase tracking-[0.2em]">Help Center</a></li>
-            <li><a href="#rules" className="text-gray-500 hover:text-[#b8860b] transition-all font-bold text-xs uppercase tracking-[0.2em]">Terms & Risk</a></li>
+            <li><a href="#legal" className="text-gray-500 hover:text-[#b8860b] transition-all font-bold text-xs uppercase tracking-[0.2em]">Legal & Terms</a></li>
+            <li><a href="#rules" className="text-gray-500 hover:text-[#b8860b] transition-all font-bold text-xs uppercase tracking-[0.2em]">Trading Rules</a></li>
             <li><a href="#register" className="text-[#b8860b] hover:text-white transition-all font-bold text-xs uppercase tracking-[0.2em] animate-pulse">Join the Elite</a></li>
           </ul>
         </div>
